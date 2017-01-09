@@ -59,7 +59,7 @@ cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin/
 
 
 ##2.4. 在Python中使用Phoenix
-使用phoenixdb库在Python中调用Phoenix，详情参考(phoenixdb文档)[http://python-phoenixdb.readthedocs.io/en/latest/]。
+使用phoenixdb库在Python中调用Phoenix，详情参考[phoenixdb文档](http://python-phoenixdb.readthedocs.io/en/latest)。
 
 > STEP.1 开启query server
 
