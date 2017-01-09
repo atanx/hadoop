@@ -1,5 +1,5 @@
-		all_visits[visit_key]["channel_name"] = parts[17]
 [TOC]
+
 phoenix安装分如下三步。
 
 ### 1.1 下载合适版本的Phoenix
@@ -47,23 +47,24 @@ tar –zxvf phoenix.tar.gz
 
 ### 3.2 关于大小写。
 
-Phoenix对于表名是大小写敏感的，SQL关键字貌似大小写不敏感。例如，如果表名为h_loupan_info选择10条记录，下列的写法是错误的。
+Phoenix对于表名是大小写敏感的，也就是说my_table和MY_TABLE是在phoenix中指的不是同一张表。
+默认情况下，所有的小写字母都会转换成大写字母。如果表名为小写形式，需要使用双引号（注意是双引号，单引号同样会报错）包裹，否则会出错。
+
+例如，如果表名为h_loupan_info选择10条记录，下列的写法是错误的。
+
 ```sql
 SELECT * FROM h_loupan_info LIMIT 10;
 ```
-因为此时Phoenix默认会将表名认为是H_LOUPAN_INFO,正确的写法是用 双引号 __"__ 将含有小写字母的表名引起来。
+因为此时Phoenix默认会将表名转为大写形式，即H_LOUPAN_INFO，将表名使用双引号包裹。
 ```sql
-SELECT * FROM "h_loupan_info"
-```math
-E = mc^2
+SELECT * FROM "h_loupan_info" LIMIT 10;
 ```
- LIMIT 10;
-```
+
 更多关于大小写的示例
 
 错误的写法
 ```sql
-drop view test_view;
+DROP VIEW test_view;
 ```
 上述代码有一处错误，`test_view`需要用双引号包裹。
 
@@ -73,6 +74,14 @@ DROP VIEW "test_view";
 ```
 
 # 实际应用
+
+1. 在phoenix中创建视图。
+
+关联HBase d_developer表。
+```sql
+CREATE VIEW "d_developer" (code VARCHAR PRIMARY KEY, "info"."name" VARCHAR, "info"."unique_code" VARCHAR, "info"."registration_no" VARCHAR, "info"."active_state" VARCHAR, "info"."company_type" VARCHAR, "info"."found_date" VARCHAR, "info"."legal_person" VARCHAR, "info"."capital" VARCHAR, "info"."operation" VARCHAR, "info"."authority" VARCHAR, "info"."issue_date" VARCHAR, "info"."address" VARCHAR, "info"."bussiness_scope" VARCHAR, "info"."url" VARCHAR, "info"."phone" VARCHAR, "info"."mail" VARCHAR, "info"."province" VARCHAR, "info"."city" VARCHAR, "info"."qu" VARCHAR, "info"."related_code" VARCHAR, "info"."is_crawled" VARCHAR);
+```
+
 ```sh
 cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin/
 ./sqlline.py master:2181
@@ -82,8 +91,97 @@ cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin/
 
 
 
+# Phoenix SQL语法参考
 
+(官方语法参考)[http://phoenix.apache.org/language/index.html]
 
+`Commands`
+
+命令			|	说明
+---				|	---
+SELECT			|查询		
+UPSERT VALUES	|插入更新
+UPSERT SELECT	|插入更新
+DELETE			|删除
+CREATE TABLE	|创建表
+DROP TABLE		|删除表
+CREATE FUNCTION	|创建函数
+DROP FUNCTION	|删除函数
+CREATE VIEW		|创建视图
+DROP VIEW		|删除视图
+CREATE SEQUENCE	|
+DROP SEQUENCE	|
+ALTER			|修改
+CREATE INDEX	|创建索引
+DROP INDEX		|删除索引
+ALTER INDEX		|修改索引
+EXPLAIN			|
+UPDATE STATISTICS|
+CREATE SCHEMA	|
+USE				|
+DROP SCHEMA		|
+```
+
+`Other Grammar`
+
+命令		|		说明
+---			|		---
+Constraint		|
+Options			|
+Hint			|
+Scan Hint		|
+Cache Hint		|
+Index Hint		|
+Small Hint		|
+Seek To Column Hint	|
+Join Hint		|
+Serial Hint		|
+Column Def		|
+Table Ref		|
+Sequence Ref	|
+Column Ref		|
+Select Expression	|
+Select Statement	|
+Split Point			|
+Table Spec			|
+Aliased Table Ref	|
+Join Type			|
+Func Argument		|
+Class Name			|
+Jar Path			|
+Order				|
+Expression			|
+And Condition		|
+Boolean Condition	|
+Condition			|
+RHS Operand			|
+Operand				|
+Summand				|
+Factor				|
+Term				|
+Array Constructor	|
+Sequence			|
+Cast				|
+Row Value Constructor	|
+Bind Parameter			|
+Value					|
+Case					|
+Case When				|
+Name					|
+Quoted Name				|
+Alias					|
+Null					|
+Data Type				|
+SQL Data Type			|
+HBase Data Type			|
+String					|
+Boolean					|
+Numeric					|
+Int						|
+Long					|
+Decimal					|
+Number					|
+Comments				|
 
 
 
