@@ -132,7 +132,7 @@ DROP VIEW "test_view";
 
 # 5. Phoenix SQL语法参考
 
-(官方语法参考)[http://phoenix.apache.org/language/index.html]
+[官方语法参考](http://phoenix.apache.org/language/index.html)
 
 `Commands`
 
@@ -159,7 +159,7 @@ UPDATE STATISTICS|
 CREATE SCHEMA	|
 USE				|
 DROP SCHEMA		|
-```
+
 
 `Other Grammar`
 
