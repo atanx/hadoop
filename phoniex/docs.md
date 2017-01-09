@@ -62,7 +62,8 @@ cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin/
 使用phoenixdb库在Python中调用Phoenix，详情参考(phoenixdb文档)[http://python-phoenixdb.readthedocs.io/en/latest/]。
 
 > STEP.1 开启query server
-1在master节点，启用Phoenix Query Server。
+
+在master节点，启用Phoenix Query Server。
 ```bash
 cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin
 python queryserver.py start
@@ -94,11 +95,11 @@ for name, city in data:
 
 有 __create view__ 和 __create table__ 两种方式。
 
-> 2. 使用create table映射HBase表之后多出一列 ___0__
+> 2.使用create table映射HBase表之后多出一列 ___0__
 
 来自[stackoverflow](http://stackoverflow.com/questions/34507470/why-phoenix-always-add-a-extra-column-named-0-to-hbase-when-i-execute-upsert)的解释。
 
-> 3 关于大小写敏感
+> 3.关于大小写敏感
 
 Phoenix对于表名是大小写敏感的，也就是说`my_table`和`MY_TABLE`是在phoenix中指的不是同一张表。
 默认情况下，所有的小写字母都会转换成大写字母。如果表名为小写形式，需要使用双引号（注意是双引号，单引号同样会报错）包裹，否则会出错。
