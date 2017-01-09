@@ -1,6 +1,6 @@
 [TOC]
 
-# Phoenix安装
+# 1. Phoenix安装
 
 phoenix安装分如下三步。
 
@@ -45,10 +45,10 @@ tar –zxvf phoenix.tar.gz
 CREATE VIEW "d_developer" (code VARCHAR PRIMARY KEY, "info"."name" VARCHAR, "info"."unique_code" VARCHAR, "info"."registration_no" VARCHAR, "info"."active_state" VARCHAR, "info"."company_type" VARCHAR, "info"."found_date" VARCHAR, "info"."legal_person" VARCHAR, "info"."capital" VARCHAR, "info"."operation" VARCHAR, "info"."authority" VARCHAR, "info"."issue_date" VARCHAR, "info"."address" VARCHAR, "info"."bussiness_scope" VARCHAR, "info"."url" VARCHAR, "info"."phone" VARCHAR, "info"."mail" VARCHAR, "info"."province" VARCHAR, "info"."city" VARCHAR, "info"."qu" VARCHAR, "info"."related_code" VARCHAR, "info"."is_crawled" VARCHAR);
 ```
 
-```sh
-cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin/
-./sqlline.py master:2181
-0: jdbc:phoenix:master:2181> select * from "d_developer" limit 10;
+
+关联h_loupan_info表。
+```sql
+CREATE VIEW "d_developer" (code VARCHAR PRIMARY KEY, "info"."name" VARCHAR, "info"."unique_code" VARCHAR, "info"."registration_no" VARCHAR, "info"."active_state" VARCHAR, "info"."company_type" VARCHAR, "info"."found_date" VARCHAR, "info"."legal_person" VARCHAR, "info"."capital" VARCHAR, "info"."operation" VARCHAR, "info"."authority" VARCHAR, "info"."issue_date" VARCHAR, "info"."address" VARCHAR, "info"."bussiness_scope" VARCHAR, "info"."url" VARCHAR, "info"."phone" VARCHAR, "info"."mail" VARCHAR, "info"."province" VARCHAR, "info"."city" VARCHAR, "info"."qu" VARCHAR, "info"."related_code" VARCHAR, "info"."is_crawled" VARCHAR);
 ```
 
 ## 2.2. 在Phoenix中创建表
@@ -62,10 +62,11 @@ select * from test;
 
 ## 2.3. 使用Phoenix查询数据
 
-```sq1
 
-select name, province, city  from "b_developer" limit 10;
-
+```sh
+cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin/
+./sqlline.py master:2181
+0: jdbc:phoenix:master:2181> select * from "d_developer" limit 10;
 ```
 
 ##2.4. 在Python中使用Phoenix
