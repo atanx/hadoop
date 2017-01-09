@@ -71,6 +71,7 @@ python queryserver.py start
 ```
 
 > STEP.2 编写python脚本
+
 ```python
 # !/usr/bin/env python
 #coding=utf-8
