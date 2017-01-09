@@ -52,11 +52,21 @@ cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin/
 ```
 
 ## 2.2. 在Phoenix中创建表
-`TODO`
+
+```sql
+create table test (mykey integer not null primary key, mycolumn varchar);
+upsert into test values (1,'Hello');
+upsert into test values (2,'World');
+select * from test;
+```
 
 ## 2.3. 使用Phoenix查询数据
 
+```sq1
 
+select name, province, city  from "b_developer" limit 10;
+
+```
 
 ##2.4. 在Python中使用Phoenix
 使用phoenixdb库在Python中调用Phoenix，详情参考[phoenixdb文档](http://python-phoenixdb.readthedocs.io/en/latest)。
@@ -89,6 +99,45 @@ for name, city in data:
 	    print name, city
 
 ```
+
+## 2.5. 在java中使用Phoenix
+
+示例代码。创建一个test表。
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+
+public class test {
+
+    public static void main(String[] args) throws SQLException {
+        Statement stmt = null;
+        ResultSet rset = null;
+    
+        Connection con = DriverManager.getConnection("jdbc:phoenix:master:2181");
+        stmt = con.createStatement();
+    
+        stmt.executeUpdate("create table test (mykey integer not null primary key, mycolumn varchar)");
+        stmt.executeUpdate("upsert into test values (1,'Hello')");
+        stmt.executeUpdate("upsert into test values (2,'World!')");
+        con.commit();
+    
+        PreparedStatement statement = con.prepareStatement("select * from test");
+        rset = statement.executeQuery();
+        while (rset.next()) {
+            System.out.println(rset.getString("mycolumn"));
+        }   
+        statement.close();
+        con.close();
+    }   
+}
+
+
+```
+
 
 # 4. FAQ
 > 1.已经有了HBase表，如何映射到Phoenix中？
