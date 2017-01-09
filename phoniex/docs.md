@@ -88,8 +88,38 @@ cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin/
 0: jdbc:phoenix:master:2181> select * from "d_developer" limit 10;
 ```
 
+2. 在Phoenex中创建表。
+`TODO`
 
+3. 在Python中使用Phoenix。
+使用phoenixdb库在Python中调用Phoenix，详情参考(phoenixdb文档)[http://python-phoenixdb.readthedocs.io/en/latest/]。
 
+3.1 开启query server
+在master节点，启用Phoenix Query Server。
+```bash
+cd /root/apache-phoenix-4.9.0-HBase-0.98-bin/bin
+python queryserver.py start
+# queryserver.py的日志位于/tmp/phoenix/root-queryserver.log
+# 从日志中可知，queryserver服务端口位于：8765
+```
+
+3.2 编写python脚本
+```python
+# !/usr/bin/env python
+#coding=utf-8
+
+import phoenixdb
+
+database_url = 'http://localhost:8765/'
+conn = phoenixdb.connect(database_url, autocommit=True)
+
+cursor = conn.cursor()
+cursor.execute('select "name","city" from "d_developer" limit 10')
+data = cursor.fetchall()
+for name, city in data:
+	    print name, city
+
+```
 
 # Phoenix SQL语法参考
 
