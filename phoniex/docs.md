@@ -165,7 +165,7 @@ DROP SCHEMA		|
 
 命令		|		说明
 ---			|		---
-Constraint		|   
+Constraint		|  限制 
 Options			|
 Hint			|
 Scan Hint		|
