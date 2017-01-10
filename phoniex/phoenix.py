@@ -3,6 +3,7 @@
 
 import phoenixdb
 import sys
+import os
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -20,8 +21,6 @@ def get_cmd_type(cmd):
 		return "data_cmd"
 	else:
 		return "no_data_cmd"
-
-
 
 
 def execute_sql(cmd):
@@ -51,7 +50,11 @@ def execute_sqlfile(sqlfile):
 if __name__ == '__main__':
 	
 	if len(sys.argv)==2:
-		execute_sqlfile(sys.argv[1])
+		if os.path.exists(sys.argv[1]):
+			execute_sqlfile(sys.argv[1])
+		else:
+			cmd = sys.argv[1]
+			execute_sql(cmd)
 	else:
 		raise SyntaxError(u"语法错误，未指定SQL文件")
 	
